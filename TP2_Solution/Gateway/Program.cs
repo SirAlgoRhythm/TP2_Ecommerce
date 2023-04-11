@@ -1,32 +1,30 @@
+using MMLib.SwaggerForOcelot.DependencyInjection;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Déclaration du dossier Routes
+var routes = "Routes";
+builder.Configuration.AddOcelotWithSwaggerSupport(options =>
+{
+    options.Folder = routes;
+});
+
+// Déclaration des services
+builder.Services.AddOcelot(builder.Configuration);
+builder.Services.AddSwaggerForOcelot(builder.Configuration);
+
 
 // Add services to the container.
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-var summaries = new[]
+//Utilisation des services déclarés
+app.UseSwaggerForOcelotUI(options =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    options.PathToSwaggerGenerator = "/swagger/docs";
 });
+app.UseOcelot().Wait();
 
 app.Run();
-
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
