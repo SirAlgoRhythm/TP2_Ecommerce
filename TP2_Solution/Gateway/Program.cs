@@ -12,6 +12,8 @@ builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 });
 
 // Déclaration des services
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
@@ -21,6 +23,11 @@ builder.Services.AddSwaggerForOcelot(builder.Configuration);
 var app = builder.Build();
 
 //Utilisation des services déclarés
+app.UseSwagger();
+app.UseSwaggerUI(config =>
+{
+    config.SwaggerEndpoint("/swagger/swagger.json", "Facture Rest API");
+});
 app.UseSwaggerForOcelotUI(options =>
 {
     options.PathToSwaggerGenerator = "/swagger/docs";

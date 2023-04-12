@@ -1,3 +1,22 @@
 {
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/factures/{everything}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "factures",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/factures/{everything}",
+      "UpstreamhttpMethod": [
+        "GET",
+        "POST",
+        "DELETE"
+      ]
+    }
 
+  ]
 }
