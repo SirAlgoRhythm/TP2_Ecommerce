@@ -42,7 +42,7 @@ namespace FactureAPI.Migrations
 
                     b.HasKey("FactureId");
 
-                    b.ToTable("Factures");
+                    b.ToTable("Factures", (string)null);
                 });
 #pragma warning restore 612, 618
         }
