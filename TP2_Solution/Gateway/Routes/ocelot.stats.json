@@ -1,3 +1,26 @@
 {
+  {
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/stats/{everything}",
+        "DownstreamScheme": "http",
+        "SwaggerKey": "stats",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5004
+          }
+        ],
+        "UpstreamPathTemplate": "/api/stats/{everything}",
+        "UpstreamhttpMethod": [
+          "GET",
+          "POST",
+          "DELETE"
+        ]
+      }
+
+    ]
+  }
 
 }
+

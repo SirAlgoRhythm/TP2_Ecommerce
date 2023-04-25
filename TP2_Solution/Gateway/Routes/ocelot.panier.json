@@ -1,3 +1,25 @@
 {
+  {
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/paniers/{everything}",
+        "DownstreamScheme": "http",
+        "SwaggerKey": "paniers",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5002
+          }
+        ],
+        "UpstreamPathTemplate": "/api/paniers/{everything}",
+        "UpstreamhttpMethod": [
+          "GET",
+          "POST",
+          "DELETE"
+        ]
+      }
+
+    ]
+  }
 
 }

@@ -10,6 +10,51 @@
           "Url": "http://localhost:5001/swagger/swagger.json"
         }
       ]
+    },
+    {
+      "Key": "paniers",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Paniers Service (API REST)",
+          "Version": "1.0",
+          "Url": "http://localhost:5002/swagger/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "products",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Productss Service (API REST)",
+          "Version": "1.0",
+          "Url": "http://localhost:5003/swagger/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "stats",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Stats Service (API REST)",
+          "Version": "1.0",
+          "Url": "http://localhost:5004/swagger/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "users",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Users Service (API REST)",
+          "Version": "1.0",
+          "Url": "http://localhost:5005/swagger/swagger.json"
+        }
+      ]
     }
+
   ]
 }
