@@ -1,26 +1,23 @@
 {
-  {
-    "Routes": [
-      {
-        "DownstreamPathTemplate": "/api/produits/{everything}",
-        "DownstreamScheme": "http",
-        "SwaggerKey": "produits",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "localhost",
-            "Port": 5003
-          }
-        ],
-        "UpstreamPathTemplate": "/api/produits/{everything}",
-        "UpstreamhttpMethod": [
-          "GET",
-          "POST",
-          "DELETE"
-        ]
-      }
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/produits/{everything}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "produits",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/produits/{everything}",
+      "UpstreamhttpMethod": [
+        "GET",
+        "POST",
+        "DELETE"
+      ]
+    }
 
-    ]
-  }
-
+  ]
 }
 

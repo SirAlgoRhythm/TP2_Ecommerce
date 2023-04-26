@@ -1,6 +1,8 @@
+using Microsoft.OpenApi.Models;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Values;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +25,6 @@ builder.Services.AddSwaggerForOcelot(builder.Configuration);
 var app = builder.Build();
 
 //Utilisation des services déclarés
-app.UseSwagger();
-app.UseSwaggerUI(config =>
-{
-    config.SwaggerEndpoint("/swagger/swagger.json", "Facture Rest API");
-});
 app.UseSwaggerForOcelotUI(options =>
 {
     options.PathToSwaggerGenerator = "/swagger/docs";

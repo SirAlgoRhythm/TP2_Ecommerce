@@ -10,6 +10,6 @@
 
         //FK liées à d'autres services
         public Guid UtilisateurId { get; set; }
-        public Guid ProduitPanierId { get; set; }
+        public Guid PanierId { get; set; }
     }
 }
