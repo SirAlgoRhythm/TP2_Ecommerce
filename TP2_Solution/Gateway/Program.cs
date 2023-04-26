@@ -22,12 +22,14 @@ builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
 var app = builder.Build();
 
+app.MapControllers();
+
 //Utilisation des services déclarés
-app.UseSwagger();
-app.UseSwaggerUI(config =>
-{
-    config.SwaggerEndpoint("/swagger/swagger.json", "Facture Rest API");
-});
+//app.UseSwagger();
+//app.UseSwaggerUI(config =>
+//{
+//    config.SwaggerEndpoint("/swagger/swagger.json", "Facture Rest API");
+//});
 app.UseSwaggerForOcelotUI(options =>
 {
     options.PathToSwaggerGenerator = "/swagger/docs";

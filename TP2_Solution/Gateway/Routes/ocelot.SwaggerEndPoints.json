@@ -7,7 +7,7 @@
         {
           "Name": "Factures Service (API REST)",
           "Version": "1.0",
-          "Url": "http://localhost:5001/swagger/swagger.json"
+          "Url": "http://localhost:5001/swagger/v1/swagger.json"
         }
       ]
     },
@@ -18,7 +18,7 @@
         {
           "Name": "Paniers Service (API REST)",
           "Version": "1.0",
-          "Url": "http://localhost:5002/swagger/swagger.json"
+          "Url": "http://localhost:5002/swagger/v1/swagger.json"
         }
       ]
     },
@@ -29,7 +29,7 @@
         {
           "Name": "Productss Service (API REST)",
           "Version": "1.0",
-          "Url": "http://localhost:5003/swagger/swagger.json"
+          "Url": "http://localhost:5003/swagger/v1/swagger.json"
         }
       ]
     },
@@ -40,7 +40,7 @@
         {
           "Name": "Stats Service (API REST)",
           "Version": "1.0",
-          "Url": "http://localhost:5004/swagger/swagger.json"
+          "Url": "http://localhost:5004/swagger/v1/swagger.json"
         }
       ]
     },
@@ -51,7 +51,7 @@
         {
           "Name": "Users Service (API REST)",
           "Version": "1.0",
-          "Url": "http://localhost:5005/swagger/swagger.json"
+          "Url": "http://localhost:5005/swagger/v1/swagger.json"
         }
       ]
     }

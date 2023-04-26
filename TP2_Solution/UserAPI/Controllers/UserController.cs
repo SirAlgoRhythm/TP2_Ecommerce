@@ -4,8 +4,17 @@ using System.Text.Json;
 
 namespace UserAPI.Controllers
 {
+    [Produces("application/json")]
+    [Route("/api/users/")]
+    [ApiController]
     public class UserController : Controller
     {
+        private UserDbContext userDbContext;
+        public UserController() 
+        {
+            userDbContext = new UserDbContext();
+        }
+
         //private HttpClient _httpClient;
         //private JsonSerializerOptions _options;
         //public UserController()
@@ -16,36 +25,75 @@ namespace UserAPI.Controllers
         //        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         //    };
         //}
-        static void AddUser(Models.User model)
+
+        [HttpGet("{UtilisateurId}", Name = "GetUser")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public IActionResult GetUser(Guid UtilisateurId)
         {
-            UserDbContext userDbContext = new UserDbContext();
-            userDbContext.Users.Add(model);
-            userDbContext.SaveChanges();
+            try
+            {
+                Models.User user = userDbContext.Users.Find(UtilisateurId);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                    return StatusCode((int)HttpStatusCode.NotFound);
+            }
+            catch (Exception) { }
+            return StatusCode((int)HttpStatusCode.BadRequest);
         }
-        static void ShowUser(Guid id)
+
+        [HttpPost]
+        [ProducesResponseType(typeof(Models.User), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public IActionResult AddUser([FromBody] Models.User _user)
         {
-            UserDbContext userDbContext = new UserDbContext();
-            Models.User user = userDbContext.Users.Find(id);
+            try
+            {
+                Models.User user = new Models.User()
+                {
+                    Name = _user.Name,
+                    LastName = _user.LastName,
+                    PasswordHash = _user.PasswordHash,
+                    IsVendor = _user.IsVendor
+                };
+                userDbContext.Users.Add(user);
+                userDbContext.SaveChanges();
+                return CreatedAtAction(nameof(GetUser), new { UtilisateurId = user.UtilisateurId }, user);
+            }
+            catch (Exception) { }
+            return BadRequest();
         }
-        static void ShowUsers()
-        {
-            UserDbContext userDbContext = new UserDbContext();
-            List<Models.User> users = userDbContext.Users.ToList();
-        }
-        static void UpdateUser(Models.User model)
-        {
-            UserDbContext userDbContext = new UserDbContext();
-            Models.User user = userDbContext.Users.Find(model.UtilisateurId);
-            user = model;
-            userDbContext.SaveChanges();
-        }
-        static void DeleteUser(Guid id)
-        {
-            UserDbContext userDbContext = new UserDbContext();
-            Models.User user = userDbContext.Users.Find(id);
-            userDbContext.Users.Remove(user);
-            userDbContext.SaveChanges();
-        }
+
+
+
+        //static void ShowUser(Guid id)
+        //{
+        //    UserDbContext userDbContext = new UserDbContext();
+        //    Models.User user = userDbContext.Users.Find(id);
+        //}
+        //static void ShowUsers()
+        //{
+        //    UserDbContext userDbContext = new UserDbContext();
+        //    List<Models.User> users = userDbContext.Users.ToList();
+        //}
+        //static void UpdateUser(Models.User model)
+        //{
+        //    UserDbContext userDbContext = new UserDbContext();
+        //    Models.User user = userDbContext.Users.Find(model.UtilisateurId);
+        //    user = model;
+        //    userDbContext.SaveChanges();
+        //}
+        //static void DeleteUser(Guid id)
+        //{
+        //    UserDbContext userDbContext = new UserDbContext();
+        //    Models.User user = userDbContext.Users.Find(id);
+        //    userDbContext.Users.Remove(user);
+        //    userDbContext.SaveChanges();
+        //}
 
         //public async Task<IActionResult> AddUser([FromBody]Models.User model)
         //{
