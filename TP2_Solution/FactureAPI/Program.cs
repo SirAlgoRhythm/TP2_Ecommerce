@@ -19,10 +19,6 @@ if (app.Environment.IsDevelopment())
     app.UseMvc();
     app.UseSwagger();
     app.UseSwaggerUI();
-    //app.UseSwaggerUI(config =>
-    //{
-    //    config.SwaggerEndpoint("/swagger/v1/swagger.json", "Facture Rest API");
-    //});
 }
 
 app.UseAuthorization();

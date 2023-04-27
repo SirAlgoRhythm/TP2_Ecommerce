@@ -23,11 +23,11 @@
       ]
     },
     {
-      "Key": "products",
+      "Key": "produits",
       "TransformByOcelotConfig": true,
       "Config": [
         {
-          "Name": "Productss Service (API REST)",
+          "Name": "Produits Service (API REST)",
           "Version": "1.0",
           "Url": "http://localhost:5003/swagger/v1/swagger.json"
         }

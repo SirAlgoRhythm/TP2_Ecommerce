@@ -29,7 +29,7 @@ namespace FactureAPI.Controllers
         /// 
 
         // GET: api/<FactureController>/id
-        [HttpGet(Name = "GetAllFactureFromUser")]
+        [HttpGet("{UtilisateurId}", Name = "GetAllFactureFromUser")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
