@@ -6,7 +6,8 @@ using System.Text.Json;
 
 namespace FactureAPI.Controllers
 {
-    [Route("api/factures/")]
+    [Produces("application/json")]
+    [Route("api/factures")]
     [ApiController]
     public class FactureController : ControllerBase
     {

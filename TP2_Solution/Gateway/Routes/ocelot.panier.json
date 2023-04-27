@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/paniers/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "SwaggerKey": "paniers",
       "DownstreamHostAndPorts": [
@@ -10,7 +10,7 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/api/paniers/{everything}",
+      "UpstreamPathTemplate": "/paniers/{everything}",
       "UpstreamhttpMethod": [
         "GET",
         "POST",

@@ -19,10 +19,10 @@ namespace StatsAPI
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StatistiqueClient>()
-                .HasKey(e => e.StatistiqueClientId);
+                .HasKey(e => e.UtilisateurId);
 
             modelBuilder.Entity<StatistiqueVendeur>()
-                .HasKey(e => e.StatistiqueVendeurId);
+                .HasKey(e => e.UtilisateurId);
         }
     }
 }

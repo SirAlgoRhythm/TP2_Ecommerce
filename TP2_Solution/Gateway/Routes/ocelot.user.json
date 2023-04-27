@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/users/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownStreamScheme": "http",
       "SwaggerKey": "users",
       "DownstreamHostAndPorts": [
@@ -10,7 +10,7 @@
           "Port": 5005
         }
       ],
-      "UpstreamPathTemplate": "/api/users/{everything}",
+      "UpstreamPathTemplate": "/users/{everything}",
       "UpstreamHttpMathod": [
         "GET",
         "POST",
