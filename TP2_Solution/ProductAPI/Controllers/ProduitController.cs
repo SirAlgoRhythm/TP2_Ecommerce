@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 
 
-namespace ProductAPI.Controllers
+namespace ProduitAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/produits")]
@@ -121,7 +121,7 @@ namespace ProductAPI.Controllers
         /// 
 
         // DELETE: api/<ProduitController>/id
-        [HttpGet("{ProduitId}", Name = "DeleteProduit")]
+        [HttpDelete("{ProduitId}", Name = "DeleteProduit")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]

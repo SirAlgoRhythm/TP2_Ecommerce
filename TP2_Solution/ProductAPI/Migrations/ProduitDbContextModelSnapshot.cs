@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProductAPI;
+using ProduitAPI;
 
 #nullable disable
 
-namespace ProductAPI.Migrations
+namespace ProduitAPI.Migrations
 {
     [DbContext(typeof(ProduitDbContext))]
     partial class ProduitDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace ProductAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProductAPI.Models.Produit", b =>
+            modelBuilder.Entity("ProduitAPI.Models.Produit", b =>
                 {
                     b.Property<Guid>("ProduitId")
                         .ValueGeneratedOnAdd()

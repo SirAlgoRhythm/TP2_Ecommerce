@@ -54,7 +54,17 @@
           "Url": "http://localhost:5005/swagger/v1/swagger.json"
         }
       ]
+    },
+    {
+      "Key": "paiement",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Paiement Service (API REST)",
+          "Version": "1.0",
+          "Url": "http://localhost:5006/swagger/v1/swagger.json"
+        }
+      ]
     }
-
   ]
 }

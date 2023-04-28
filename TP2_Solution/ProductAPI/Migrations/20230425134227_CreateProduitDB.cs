@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ProductAPI.Migrations
+namespace ProduitAPI.Migrations
 {
     /// <inheritdoc />
     public partial class CreateProduitDB : Migration

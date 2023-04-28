@@ -1,24 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProduitAPI.Models;
+using PaiementAPI.Models;
 
-namespace ProduitAPI
+namespace PaiementAPI
 {
-    public class ProduitDbContext: DbContext
+    public class PaiementDbContext: DbContext
     {
-        public DbSet<Produit> Produits { get; set; }
+        public DbSet<Paiement> Paiements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
             //Antoine connection string:
             string connection_string = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            string db_name = "TP2_ProduitAPI_DB";
+            string db_name = "TP2_PaiementAPI_DB";
             dbContextOptionsBuilder.UseSqlServer($"{connection_string};Database={db_name}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Produit>()
-                .HasKey(e => e.ProduitId);
+            modelBuilder.Entity<Paiement>()
+                .HasKey(e => e.PaiementId);
         }
     }
 }
