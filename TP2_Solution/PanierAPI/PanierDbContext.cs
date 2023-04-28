@@ -7,6 +7,7 @@ namespace PanierAPI
     public class PanierDbContext: DbContext
     {
         public DbSet<Panier> Paniers { get; set; }
+        public DbSet<ProduitIds> ProduitIds { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
@@ -21,6 +22,8 @@ namespace PanierAPI
         {
             modelBuilder.Entity<Panier>()
                 .HasKey(e => e.PanierId);
+            modelBuilder.Entity<ProduitIds>()
+                .HasKey(e => e.ProduitId);
         }
     }
 }
