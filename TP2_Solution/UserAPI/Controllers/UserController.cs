@@ -11,7 +11,7 @@ namespace UserAPI.Controllers
     public class UserController : Controller
     {
         private UserDbContext userDbContext;
-        public UserController() 
+        public UserController()
         {
             userDbContext = new UserDbContext();
         }
@@ -47,15 +47,15 @@ namespace UserAPI.Controllers
             return StatusCode((int)HttpStatusCode.BadRequest);
         }
         //Pour authentication
-        [HttpPost]
+        [HttpGet("{Name}/{PasswordHash}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public IActionResult GetAsync(Models.User _user)
+        public IActionResult GetUserForAuth(string Name, string PasswordHash)
         {
             try
             {
-                Models.User user = userDbContext.Users.Where(u => u.Name == _user.Name && u.PasswordHash == _user.PasswordHash).First();
+                Models.User user = userDbContext.Users.Where(u => u.Name == Name && u.PasswordHash == PasswordHash).First();
                 if (user != null)
                 {
                     return Ok(user);

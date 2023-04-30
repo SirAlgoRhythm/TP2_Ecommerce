@@ -57,17 +57,17 @@ namespace AuthenticationAPI.Controllers
 
         //Je suis capable de générer un token mais j'arrive pas à communiquer avec le service UserAPI
         [HttpPost]
-        public async Task<IActionResult> Login(Models.User model)
+        public async Task<IActionResult> Login([FromBody]Models.User model)
         {
             if (model == null)
             {
                 return BadRequest("Invalid client request");
             }
             //marche pas
-            //HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5005/swagger/v1/users/{model.Name}/{model.PasswordHash}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5000/users/users/{model.Name}/{model.PasswordHash}");
             bool Testbool = true;
-            //if (response.IsSuccessStatusCode)
-            if (Testbool)
+            if (response.IsSuccessStatusCode)
+                //if (Testbool)
             {
                 //minimum 168 bits
                 string key = $"{model.Name}{model.PasswordHash}";
@@ -78,13 +78,13 @@ namespace AuthenticationAPI.Controllers
                         key+= (char)rnd.Next('a', 'z');
                 }
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var muSigninCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var tokenOptions = new JwtSecurityToken(
                     issuer: "https://localhost:5007",
                     audience: "https://localhost:5007",
                     claims: new List<Claim>(),
                     expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signinCredentials
+                    signingCredentials: muSigninCredentials
                 );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
                 return Ok(new { Token = tokenString });

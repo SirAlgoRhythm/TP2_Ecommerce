@@ -156,7 +156,7 @@ namespace PanierAPI.Controllers
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5002/api/paniers/{PanierId}");
+                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5000/api/paniers/{PanierId}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -165,7 +165,7 @@ namespace PanierAPI.Controllers
 
                     panier.ProduitIdListe.Add(new Models.ProduitIds() { ProduitId = ProduitId});
 
-                    HttpResponseMessage responce2 = await _httpClient.PutAsJsonAsync($"http://localhost:5002/api/paniers/{PanierId}", panier);
+                    HttpResponseMessage responce2 = await _httpClient.PutAsJsonAsync($"http://localhost:5000/api/paniers/{PanierId}", panier);
 
                     if (responce2.IsSuccessStatusCode)
                     {
@@ -198,7 +198,7 @@ namespace PanierAPI.Controllers
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5002/api/paniers/{PanierId}");
+                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5000/api/paniers/{PanierId}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -207,7 +207,7 @@ namespace PanierAPI.Controllers
 
                     panier.ProduitIdListe.Remove(panier.ProduitIdListe.Where(p => p.ProduitId == ProduitId).First());
 
-                    HttpResponseMessage responce2 = await _httpClient.PutAsJsonAsync($"http://localhost:5002/api/paniers/{PanierId}", panier);
+                    HttpResponseMessage responce2 = await _httpClient.PutAsJsonAsync($"http://localhost:5000/api/paniers/{PanierId}", panier);
 
                     if (responce2.IsSuccessStatusCode)
                     {
