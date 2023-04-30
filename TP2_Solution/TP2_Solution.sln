@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatsAPI", "StatsAPI\StatsA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaiementAPI", "PaiementAPI\PaiementAPI.csproj", "{44E109B1-E8BB-4809-B72E-9653357B4217}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationAPI", "Authentication\AuthenticationAPI.csproj", "{0F94A728-0CC6-456C-BA33-CA48E07F48D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{44E109B1-E8BB-4809-B72E-9653357B4217}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44E109B1-E8BB-4809-B72E-9653357B4217}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44E109B1-E8BB-4809-B72E-9653357B4217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F94A728-0CC6-456C-BA33-CA48E07F48D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F94A728-0CC6-456C-BA33-CA48E07F48D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F94A728-0CC6-456C-BA33-CA48E07F48D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F94A728-0CC6-456C-BA33-CA48E07F48D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{725C1FFD-7867-4637-B4E3-A6D771820B0A} = {6B4EA705-2CC6-48A7-A22F-FEC69B5D189D}
 		{707968A4-AB25-43D2-8129-39EB054A6BD1} = {6B4EA705-2CC6-48A7-A22F-FEC69B5D189D}
 		{44E109B1-E8BB-4809-B72E-9653357B4217} = {6B4EA705-2CC6-48A7-A22F-FEC69B5D189D}
+		{0F94A728-0CC6-456C-BA33-CA48E07F48D4} = {6B4EA705-2CC6-48A7-A22F-FEC69B5D189D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE2D3B5E-A7F1-4830-85DF-642AD6E0E157}

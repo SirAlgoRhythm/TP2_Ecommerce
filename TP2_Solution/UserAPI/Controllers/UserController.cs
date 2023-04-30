@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 
@@ -45,11 +46,52 @@ namespace UserAPI.Controllers
             catch (Exception) { }
             return StatusCode((int)HttpStatusCode.BadRequest);
         }
-
+        //Pour authentication
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public IActionResult GetAsync(Models.User _user)
+        {
+            try
+            {
+                Models.User user = userDbContext.Users.Where(u => u.Name == _user.Name && u.PasswordHash == _user.PasswordHash).First();
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                    return StatusCode((int)HttpStatusCode.NotFound);
+            }
+            catch (Exception) { }
+            return StatusCode((int)HttpStatusCode.BadRequest);
+        }
+        //CLIENT
+        [Route("/api/users/client/")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public IActionResult GetUsersClient()
+        {
+            try
+            {
+                List<Models.User> users = userDbContext.Users.Where(u => u.IsVendor == false).ToList();
+                if (users != null)
+                {
+                    return Ok(users);
+                }
+                else
+                    return StatusCode((int)HttpStatusCode.NotFound);
+            }
+            catch (Exception) { }
+            return StatusCode((int)HttpStatusCode.BadRequest);
+        }
+        [Route("/api/users/client/")]
         [HttpPost]
         [ProducesResponseType(typeof(Models.User), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public IActionResult AddUser([FromBody] Models.User _user)
+        public IActionResult AddUserClient([FromBody] Models.User _user)
         {
             try
             {
@@ -58,7 +100,7 @@ namespace UserAPI.Controllers
                     Name = _user.Name,
                     LastName = _user.LastName,
                     PasswordHash = _user.PasswordHash,
-                    IsVendor = _user.IsVendor
+                    IsVendor = false
                 };
                 userDbContext.Users.Add(user);
                 userDbContext.SaveChanges();
@@ -68,32 +110,74 @@ namespace UserAPI.Controllers
             return BadRequest();
         }
 
+        //VENDOR
+        [Route("/api/users/vendor/")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public IActionResult GetUsersVendor()
+        {
+            try
+            {
+                List<Models.User> users = userDbContext.Users.Where(u => u.IsVendor == true).ToList();
+                if (users != null)
+                {
+                    return Ok(users);
+                }
+                else
+                    return StatusCode((int)HttpStatusCode.NotFound);
+            }
+            catch (Exception) { }
+            return StatusCode((int)HttpStatusCode.BadRequest);
+        }
+        [Route("/api/users/vendor/")]
+        [HttpPost]
+        [ProducesResponseType(typeof(Models.User), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public IActionResult AddUserVendor([FromBody] Models.User _user)
+        {
+            try
+            {
+                Models.User user = new Models.User()
+                {
+                    Name = _user.Name,
+                    LastName = _user.LastName,
+                    PasswordHash = _user.PasswordHash,
+                    IsVendor = true
+                };
+                userDbContext.Users.Add(user);
+                userDbContext.SaveChanges();
+                return CreatedAtAction(nameof(GetUser), new { UtilisateurId = user.UtilisateurId }, user);
+            }
+            catch (Exception) { }
+            return BadRequest();
+        }
 
+        [HttpPut("{UtilisateurId}")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public IActionResult EditUser(Guid UtilisateurId, [FromBody] Models.User _user)
+        {
+            try
+            {
+                Models.User user = userDbContext.Users.Find(UtilisateurId);
+                if (user != null)
+                {
+                    user.Name = _user.Name ?? user.Name;
+                    user.LastName = _user.LastName ?? user.LastName;
+                    user.PasswordHash = _user.PasswordHash ?? user.PasswordHash;
+                    userDbContext.SaveChanges();
 
-        //static void ShowUser(Guid id)
-        //{
-        //    UserDbContext userDbContext = new UserDbContext();
-        //    Models.User user = userDbContext.Users.Find(id);
-        //}
-        //static void ShowUsers()
-        //{
-        //    UserDbContext userDbContext = new UserDbContext();
-        //    List<Models.User> users = userDbContext.Users.ToList();
-        //}
-        //static void UpdateUser(Models.User model)
-        //{
-        //    UserDbContext userDbContext = new UserDbContext();
-        //    Models.User user = userDbContext.Users.Find(model.UtilisateurId);
-        //    user = model;
-        //    userDbContext.SaveChanges();
-        //}
-        //static void DeleteUser(Guid id)
-        //{
-        //    UserDbContext userDbContext = new UserDbContext();
-        //    Models.User user = userDbContext.Users.Find(id);
-        //    userDbContext.Users.Remove(user);
-        //    userDbContext.SaveChanges();
-        //}
+                    return Ok(user);
+                }
+                else
+                    return StatusCode((int)HttpStatusCode.NotFound);
+            }
+            catch (Exception) { }
+            return StatusCode((int)HttpStatusCode.BadRequest);
+        }
 
         //public async Task<IActionResult> AddUser([FromBody]Models.User model)
         //{

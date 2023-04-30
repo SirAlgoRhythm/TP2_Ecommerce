@@ -65,6 +65,17 @@
           "Url": "http://localhost:5006/swagger/v1/swagger.json"
         }
       ]
+    },
+    {
+      "Key": "authentication",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Authentication Service (API REST)",
+          "Version": "1.0",
+          "Url": "http://localhost:5007/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }

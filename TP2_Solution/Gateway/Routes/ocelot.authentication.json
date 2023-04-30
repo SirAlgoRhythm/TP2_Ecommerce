@@ -1,0 +1,21 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownStreamScheme": "http",
+      "SwaggerKey": "authentication",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "UpstreamPathTemplate": "/authentication/{everything}",
+      "UpstreamHttpMathod": [
+        "GET",
+        "POST",
+        "DELETE"
+      ]
+    }
+  ]
+}
