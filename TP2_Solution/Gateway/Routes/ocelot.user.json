@@ -11,7 +11,7 @@
         }
       ],
       "UpstreamPathTemplate": "/users/{everything}",
-      "UpstreamHttpMathod": [
+      "UpstreamHttpMethod": [
         "GET",
         "POST",
         "DELETE"

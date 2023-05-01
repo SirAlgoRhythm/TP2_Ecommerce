@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -16,14 +15,14 @@ builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
 builder.Services.AddSwaggerGen(opt =>
 {
     //jeton authentification
-    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    opt.AddSecurityDefinition("Jeton", new OpenApiSecurityScheme
     {
-        In = ParameterLocation.Header,
-        Description = "Please enter token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
+        Name = "Bearer",
         BearerFormat = "JWT",
-        Scheme = "bearer"
+        Scheme = "bearer",
+        Description = "Specify the authorization token.",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
     });
     opt.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -33,25 +32,22 @@ builder.Services.AddSwaggerGen(opt =>
                 Reference = new OpenApiReference
                 {
                     Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
+                    Id="Jeton"
                 }
             },
             new string[]{}
         }
     });
 });
-//erreur 401
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
-//        options => builder.Configuration.Bind("JwtSettings", options));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
 {
-    options.Authority = "http://localhost:5007";
+    options.Authority = "http://localhost:5000";
     options.RequireHttpsMetadata = false;
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = false,
         ValidateAudience = false,
+        ValidateLifetime=true
     };
 });
 builder.Services.AddAuthorization(option =>
@@ -60,10 +56,6 @@ builder.Services.AddAuthorization(option =>
         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
         .RequireAuthenticatedUser().Build());
 });
-
-
-//builder.Services.AddControllers();
-//builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 

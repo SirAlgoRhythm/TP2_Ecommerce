@@ -16,17 +16,6 @@ namespace UserAPI.Controllers
             userDbContext = new UserDbContext();
         }
 
-        //private HttpClient _httpClient;
-        //private JsonSerializerOptions _options;
-        //public UserController()
-        //{
-        //    _httpClient = new HttpClient();
-        //    _options = new JsonSerializerOptions()
-        //    {
-        //        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        //    };
-        //}
-
         [HttpGet("{UtilisateurId}", Name = "GetUser")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -38,6 +27,30 @@ namespace UserAPI.Controllers
                 Models.User user = userDbContext.Users.Find(UtilisateurId);
                 if (user != null)
                 {
+                    return Ok(user);
+                }
+                else
+                    return StatusCode((int)HttpStatusCode.NotFound);
+            }
+            catch (Exception) { }
+            return StatusCode((int)HttpStatusCode.BadRequest);
+        }
+        [HttpPut("{UtilisateurId}")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public IActionResult EditUser(Guid UtilisateurId, [FromBody] Models.User _user)
+        {
+            try
+            {
+                Models.User user = userDbContext.Users.Find(UtilisateurId);
+                if (user != null)
+                {
+                    user.Name = _user.Name ?? user.Name;
+                    user.LastName = _user.LastName ?? user.LastName;
+                    user.PasswordHash = _user.PasswordHash ?? user.PasswordHash;
+                    userDbContext.SaveChanges();
+
                     return Ok(user);
                 }
                 else
@@ -66,6 +79,7 @@ namespace UserAPI.Controllers
             catch (Exception) { }
             return StatusCode((int)HttpStatusCode.BadRequest);
         }
+
         //CLIENT
         [Route("/api/users/client/")]
         [HttpGet]
@@ -153,46 +167,5 @@ namespace UserAPI.Controllers
             catch (Exception) { }
             return BadRequest();
         }
-
-        [HttpPut("{UtilisateurId}")]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public IActionResult EditUser(Guid UtilisateurId, [FromBody] Models.User _user)
-        {
-            try
-            {
-                Models.User user = userDbContext.Users.Find(UtilisateurId);
-                if (user != null)
-                {
-                    user.Name = _user.Name ?? user.Name;
-                    user.LastName = _user.LastName ?? user.LastName;
-                    user.PasswordHash = _user.PasswordHash ?? user.PasswordHash;
-                    userDbContext.SaveChanges();
-
-                    return Ok(user);
-                }
-                else
-                    return StatusCode((int)HttpStatusCode.NotFound);
-            }
-            catch (Exception) { }
-            return StatusCode((int)HttpStatusCode.BadRequest);
-        }
-
-        //public async Task<IActionResult> AddUser([FromBody]Models.User model)
-        //{
-        //    try
-        //    {
-        //        HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5000/api/users/{model.UtilisateurId}");
-
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            string responseContent = await response.Content.ReadAsStringAsync();
-        //            Models.User? user = JsonSerializer.Deserialize<Models.User>(responseContent, _options);
-        //        }
-        //    }
-        //    catch (Exception) { }
-
-        //}
     }
 }

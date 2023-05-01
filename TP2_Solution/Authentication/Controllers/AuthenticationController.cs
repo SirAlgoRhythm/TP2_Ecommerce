@@ -55,19 +55,15 @@ namespace AuthenticationAPI.Controllers
             return StatusCode((int)HttpStatusCode.BadRequest);
         }
 
-        //Je suis capable de générer un token mais j'arrive pas à communiquer avec le service UserAPI
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]Models.User model)
         {
             if (model == null)
             {
-                return BadRequest("Invalid client request");
+                return BadRequest();
             }
-            //marche pas
             HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5000/users/users/{model.Name}/{model.PasswordHash}");
-            bool Testbool = true;
             if (response.IsSuccessStatusCode)
-                //if (Testbool)
             {
                 //minimum 168 bits
                 string key = $"{model.Name}{model.PasswordHash}";
