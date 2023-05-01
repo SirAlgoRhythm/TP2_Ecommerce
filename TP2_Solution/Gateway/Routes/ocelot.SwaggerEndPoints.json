@@ -56,7 +56,7 @@
       ]
     },
     {
-      "Key": "paiement",
+      "Key": "paiements",
       "TransformByOcelotConfig": true,
       "Config": [
         {
