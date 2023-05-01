@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PanierAPI.Models;
 using System.Net;
 using System.Text.Json;
 
@@ -68,8 +69,9 @@ namespace PanierAPI.Controllers
                 Models.Panier panier = new Models.Panier()
                 {
                     PanierId = Guid.NewGuid(),
-                    ProduitIdListe = model.ProduitIdListe
+                    ProduitIdListe = new List<ProduitIds>() { }
                 };
+                panier.ProduitIdListe.Add(model.ProduitIdListe.First());
                 _context.Add(panier);
                 _context.SaveChanges();
                 return CreatedAtAction(nameof(GetPanier), new { panierId = panier.PanierId }, panier);
@@ -156,7 +158,7 @@ namespace PanierAPI.Controllers
         {
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5000/api/paniers/{PanierId}");
+                HttpResponseMessage response = await _httpClient.GetAsync($"http://localhost:5000/paniers/Panier/{PanierId}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -165,7 +167,7 @@ namespace PanierAPI.Controllers
 
                     panier.ProduitIdListe.Add(new Models.ProduitIds() { ProduitId = ProduitId});
 
-                    HttpResponseMessage responce2 = await _httpClient.PutAsJsonAsync($"http://localhost:5000/api/paniers/{PanierId}", panier);
+                    HttpResponseMessage responce2 = await _httpClient.PutAsJsonAsync($"http://localhost:5000/paniers/Panier/{PanierId}", panier);
 
                     if (responce2.IsSuccessStatusCode)
                     {

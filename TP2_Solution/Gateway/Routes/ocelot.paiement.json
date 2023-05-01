@@ -10,11 +10,10 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/paiement/{everything}",
+      "UpstreamPathTemplate": "/paiements/{everything}",
       "UpstreamhttpMethod": [
         "GET",
-        "POST",
-        "DELETE"
+        "POST"
       ]
     }
   ]

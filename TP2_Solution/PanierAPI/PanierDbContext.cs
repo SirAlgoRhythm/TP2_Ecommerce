@@ -21,9 +21,12 @@ namespace PanierAPI
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Panier>()
-                .HasKey(e => e.PanierId);
+                .HasMany(p => p.ProduitIdListe)
+                .WithMany()
+                .UsingEntity(j => j.ToTable("PanierProduit"));
             modelBuilder.Entity<ProduitIds>()
-                .HasKey(e => e.ProduitId);
+                .HasKey(p => p.Id);
         }
+
     }
 }
