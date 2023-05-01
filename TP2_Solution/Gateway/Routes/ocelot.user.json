@@ -14,7 +14,8 @@
       "UpstreamHttpMethod": [
         "GET",
         "POST",
-        "DELETE"
+        "DELETE",
+        "PUT"
       ]
     }
   ]
